@@ -46,7 +46,7 @@ export function setUpModule() {
         newPage.content = tmp;
         return newPage;
     };
-    
+
     navHelper.navigate(pageFactory);
 }
 
@@ -142,7 +142,7 @@ export function test_StackLayout_DesiredSize_Vertical() {
     }, ASYNC);
 
     TKUnit.assertEqual(rootLayout.getMeasuredWidth(), Math.max(btn1.getMeasuredWidth(), btn2.getMeasuredWidth()), "Layout getMeasuredWidth should be Max of children getMeasuredWidth");
-    TKUnit.assertEqual(rootLayout.getMeasuredHeight(),(btn1.getMeasuredHeight() + btn2.getMeasuredHeight()), "Layout getMeasuredHeight should be Sum of children getMeasuredHeight");
+    TKUnit.assertEqual(rootLayout.getMeasuredHeight(), (btn1.getMeasuredHeight() + btn2.getMeasuredHeight()), "Layout getMeasuredHeight should be Sum of children getMeasuredHeight");
 }
 
 export function test_StackLayout_DesiredSize_Horizontal() {
@@ -155,7 +155,7 @@ export function test_StackLayout_DesiredSize_Horizontal() {
         return btn2.arranged;
     }, ASYNC);
 
-    TKUnit.assertEqual(rootLayout.getMeasuredWidth(),(btn1.getMeasuredWidth() + btn2.getMeasuredWidth()), "Layout getMeasuredWidth should be Sum of children getMeasuredWidth");
+    TKUnit.assertEqual(rootLayout.getMeasuredWidth(), (btn1.getMeasuredWidth() + btn2.getMeasuredWidth()), "Layout getMeasuredWidth should be Sum of children getMeasuredWidth");
     TKUnit.assertEqual(rootLayout.getMeasuredHeight(), Math.max(btn1.getMeasuredHeight(), btn2.getMeasuredHeight()), "Layout getMeasuredHeight should be Max of children getMeasuredHeight");
 }
 
@@ -206,6 +206,16 @@ export function test_codesnippets() {
     // ``` JavaScript
     var stackLayout = new layout.StackLayout();
     //  ```
+
+    // ### Declaring a StackLayout.
+    //```XML
+    // <Page>
+    //   <StackLayout orientation="horizontal">
+    //     <Label text="This is Label 1" />
+    //   </StackLayout>
+    // </Page>
+    //```
+    // </snippet>
 
     // ### Add child view to layout
     // ``` JavaScript
