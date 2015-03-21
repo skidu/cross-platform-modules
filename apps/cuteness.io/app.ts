@@ -2,8 +2,8 @@
 
 application.tabs = 
     [
-        { title: "List", moduleName: "app/main-page" },
-        { title: "About", moduleName: "app/about-page"}
+        { title: "List", moduleName: "/main-page" },
+        { title: "About", moduleName: "/about-page"}
     ];
 
 // Start the application
