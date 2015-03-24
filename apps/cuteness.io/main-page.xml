@@ -1,4 +1,8 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded">
+  <TabView>
+    <TabView.items>
+      <TabViewItem title="List">
+        <TabViewItem.view>
           <ListView items="{{ redditItems }}" isScrolling="{{ isScrolling }}" itemTap="listViewItemTap" loadMoreItems="listViewLoadMoreItems">
             <ListView.itemTemplate>
               <!-- Binding in template property of an component will use the bindingContext provided by the component. -->
@@ -11,4 +15,16 @@
               <!-- End of tempplate. -->
             </ListView.itemTemplate>
           </ListView>
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="About">
+        <TabViewItem.view>
+          <StackLayout>
+            <Image margin="10" src="~/res/telerik-logo.png" />
+            <Label margin="10" textWrap="true" text="{{ aboutText }}" />
+          </StackLayout>
+        </TabViewItem.view>
+      </TabViewItem>
+    </TabView.items>
+  </TabView>
 </Page>
