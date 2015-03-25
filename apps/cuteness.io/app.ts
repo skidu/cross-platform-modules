@@ -1,7 +1,10 @@
 ﻿import application = require("application");
 
-// Set the start module for the application
-application.mainModule = "main-page";
+application.tabs = 
+    [
+        { title: "List", moduleName: "app/main-page" },
+        { title: "About", moduleName: "app/about-page"}
+    ];
 
 // Start the application
 application.start();
