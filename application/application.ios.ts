@@ -10,6 +10,7 @@ declare var exports;
 require("utils/module-merge").merge(appModule, exports);
 
 export var mainModule: string;
+export var tabs: Array<definition.ApplicationTab>;
 
 class Window extends UIWindow {
 

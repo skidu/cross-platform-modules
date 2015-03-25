@@ -1,0 +1,6 @@
+﻿<Page xmlns="http://www.nativescript.org/tns.xsd">
+  <StackLayout>
+    <Image margin="10" src="~/app/res/telerik-logo.png" />
+    <Label margin="10" textWrap="true" text="Cuteness is a proof of concept app demonstrating the Telerik's NativeScript for writing native mobile applications using JavaScript." />
+  </StackLayout>
+</Page>

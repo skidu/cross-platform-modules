@@ -2,6 +2,7 @@
 import dts = require("application");
 import frame = require("ui/frame");
 import types = require("utils/types");
+import imageSource = require("image-source");
 
 // merge the exports of the application_common file with the exports of this file
 declare var exports;
@@ -10,6 +11,7 @@ require("utils/module-merge").merge(appModule, exports);
 var callbacks = android.app.Application.ActivityLifecycleCallbacks;
 
 export var mainModule: string;
+export var tabs: Array<dts.ApplicationTab>;
 
 // We are using the exports object for the common events since we merge the appModule with this module's exports, which is what users will receive when require("application") is called;
 // TODO: This is kind of hacky and is "pure JS in TypeScript"
@@ -28,6 +30,8 @@ var initEvents = function () {
             }
 
             androidApp.currentContext = activity;
+
+            androidApp.setupTabsIfNeeded(activity);
         },
         onActivityDestroyed: function (activity: any) {
             // Clear the current activity reference to prevent leak
@@ -190,9 +194,15 @@ class AndroidApplication implements dts.AndroidApplication {
 
         var topFrame = frame.topmost();
         if (!topFrame) {
+            
+            if (!mainModule && tabs) {
+                mainModule = tabs[0].moduleName;
+            }
+
             // try to navigate to the mainModule (if specified)
             if (mainModule) {
                 topFrame = new frame.Frame();
+                this._currentModuleName = mainModule;
                 topFrame.navigate(mainModule);
             } else {
                 // TODO: Throw an exception?
@@ -207,6 +217,84 @@ class AndroidApplication implements dts.AndroidApplication {
         this._eventsToken = initEvents();
         this.nativeApp.registerActivityLifecycleCallbacks(this._eventsToken);
         this.context = this.nativeApp.getApplicationContext();
+    }
+
+    private _tabListener: android.app.ActionBar.TabListener;
+    private _currentModuleName: string;
+    public setupTabsIfNeeded(activity: android.app.Activity) {
+        var tabs = <Array<dts.ApplicationTab>>exports.tabs;
+        if (!tabs) {
+            return;
+        }
+
+        var that = new WeakRef(this);
+        this._tabListener = new android.app.ActionBar.TabListener({
+            get owner() {
+                return that.get();
+            },
+            onTabSelected: function (tab: android.app.ActionBar.Tab, transaction: android.app.FragmentTransaction) {
+                var owner = this.owner;
+                if (!owner) {
+                    return;
+                }
+                
+                var moduleName = <string>tab.getTag();
+                
+                console.log("owner._currentModuleName:" + owner._currentModuleName);
+                console.log("moduleName:" + moduleName);
+                
+                if (owner._currentModuleName !== moduleName) {
+                    owner._currentModuleName = moduleName;
+                    console.log(">>>>>>>>>>>>>> " + moduleName);
+                    frame.topmost().navigate(moduleName);
+                }
+            },
+            onTabUnselected: function (tab: android.app.ActionBar.Tab, transaction: android.app.FragmentTransaction) {
+                //
+            },
+            onTabReselected: function (tab: android.app.ActionBar.Tab, transaction: android.app.FragmentTransaction) {
+                //
+            }
+        });
+
+        var actionBar = activity.getActionBar();
+        if (!actionBar) {
+            return;
+        }
+
+        // Tell the action-bar to display tabs.
+        actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.show();
+
+        var i: number = 0;
+        var length = tabs.length;
+        var item: dts.ApplicationTab;
+        var tab: android.app.ActionBar.Tab;
+        for (i; i < length; i++) {
+            item = tabs[i];
+            tab = actionBar.newTab();
+            tab.setTag(item.moduleName);
+            tab.setText(item.title);
+            AndroidApplication._setIcon(item.iconSource, tab);
+            tab.setTabListener(this._tabListener);
+            actionBar.addTab(tab);
+        }
+    }
+
+    private static _setIcon(iconSource: string, tab: android.app.ActionBar.Tab): void {
+        if (!iconSource) {
+            return;
+        }
+
+        var drawable: android.graphics.drawable.BitmapDrawable;
+        var is = imageSource.fromFileOrResource(iconSource);
+        if (is) {
+            drawable = new android.graphics.drawable.BitmapDrawable(is.android);
+        }
+
+        if (drawable) {
+            tab.setIcon(drawable);
+        }
     }
 }
 

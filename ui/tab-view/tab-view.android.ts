@@ -154,7 +154,7 @@ export class TabView extends common.TabView {
                 return that.get();
             },
 
-            onTabSelected: function (tab: android.app.ActionBar.Tab, transaction) {
+            onTabSelected: function (tab: android.app.ActionBar.Tab, transaction: android.app.FragmentTransaction) {
                 var owner = this.owner;
                 if (!owner) {
                     return;

@@ -5,6 +5,31 @@ declare module "application" {
     import cssSelector = require("ui/styling/css-selector");
 
     /**
+     * Represents an application tab entry.
+     */
+    export interface ApplicationTab {
+        /**
+         * Gets or sets the title of the application tab.
+         */
+        title: string;
+
+        /**
+         * Gets or sets the module that will displayed when the application tab is selected.
+         */
+        moduleName: string;
+
+        /**
+         * Gets or sets the icon source of the application tab. This could either be a a file name or resource id.
+         */
+        iconSource?: string;
+    }
+
+    /**
+     * Represents the application level tabs of tabbed application.
+     */
+    export var tabs: Array<ApplicationTab>;
+    
+    /**
      * An extended JavaScript Error which will have the nativeError property initialized in case the error is caused by executing platform-specific code.
      */
     export interface NativeScriptError extends Error {
@@ -13,6 +38,8 @@ declare module "application" {
          */
         nativeError: any;
     }
+
+
 
    /**
     * The main page path (without the file extension) for the application starting from the application root. 
