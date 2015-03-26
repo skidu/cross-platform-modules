@@ -251,15 +251,15 @@
     <TypeScriptCompile Include="image-source\image-source.d.ts" />
     <TypeScriptCompile Include="js-libs\easysax\easysax.d.ts" />
     <TypeScriptCompile Include="location\location.d.ts" />
-	<TypeScriptCompile Include="location\location-common.ts" >
-	  <DependentUpon>location.d.ts</DependentUpon>
-	</TypeScriptCompile>
-	<TypeScriptCompile Include="location\location.android.ts" >
-	  <DependentUpon>location.d.ts</DependentUpon>
-	</TypeScriptCompile>
-	<TypeScriptCompile Include="location\location.ios.ts" >
-	  <DependentUpon>location.d.ts</DependentUpon>
-	</TypeScriptCompile>
+    <TypeScriptCompile Include="location\location-common.ts">
+      <DependentUpon>location.d.ts</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="location\location.android.ts">
+      <DependentUpon>location.d.ts</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="location\location.ios.ts">
+      <DependentUpon>location.d.ts</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="apps\tests\app\pageNavigation.ts" />
     <TypeScriptCompile Include="apps\tests\pages\navigation\pageA-new-activity.ts" />
     <TypeScriptCompile Include="apps\tests\pages\navigation\pageA.ts" />
@@ -395,7 +395,9 @@
     <TypeScriptCompile Include="apps\TelerikNEXT\TelerikUI\side-bar\side-bar.android.ts" />
     <TypeScriptCompile Include="apps\TelerikNEXT\TelerikUI\side-bar\side-bar.d.ts" />
     <TypeScriptCompile Include="apps\TelerikNEXT\TelerikUI\side-bar\side-bar.ios.ts" />
+    <TypeScriptCompile Include="ui\styling\css-selector.d.ts" />
     <TypeScriptCompile Include="ui\styling\css-selector.ts" />
+    <TypeScriptCompile Include="ui\styling\style-property.d.ts" />
     <TypeScriptCompile Include="ui\styling\style.ts" />
     <TypeScriptCompile Include="ui\styling\visual-state.ts" />
     <TypeScriptCompile Include="ui\core\view-common.ts">
