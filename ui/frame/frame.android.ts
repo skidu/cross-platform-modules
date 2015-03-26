@@ -147,6 +147,21 @@ function onFragmentShown(fragment: PageFragmentBody) {
     frame._addView(page);
     page.onNavigatedTo(entry.entry.context);
     frame._processNavigationQueue(page);
+
+    // Select the respective application tab if needed.
+    var actionBar = fragment.getActivity().getActionBar();
+    if (actionBar && application.tabs && entry.entry.moduleName) {
+        var i: number = 0;
+        var length = application.tabs.length;
+        var item: application.ApplicationTab;
+        var tab: android.app.ActionBar.Tab;
+        for (i; i < length; i++) {
+            item = application.tabs[i];
+            if (item.moduleName === entry.entry.moduleName) {
+                actionBar.setSelectedNavigationItem(i);
+            }
+        }
+    }
 }
 
 function onFragmentHidden(fragment: PageFragmentBody) {

@@ -240,12 +240,8 @@ class AndroidApplication implements dts.AndroidApplication {
                 
                 var moduleName = <string>tab.getTag();
                 
-                console.log("owner._currentModuleName:" + owner._currentModuleName);
-                console.log("moduleName:" + moduleName);
-                
                 if (owner._currentModuleName !== moduleName) {
                     owner._currentModuleName = moduleName;
-                    console.log(">>>>>>>>>>>>>> " + moduleName);
                     frame.topmost().navigate(moduleName);
                 }
             },
